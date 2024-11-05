@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise and Sunset</title>
+    <style type="text/css">
+        div {
+            margin: 20px;
+            font-size: 25px;
+        }
+        #sunset {
+            color: #96250f;
+        }
+        #sunrise {
+            color: 	#cd6a00;
+        }
+        li {
+            margin: 20px;
+            font-size: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="sunrise"></div>
+    <div id="sunset"></div>
+    <script>
+        res = fetch("https://api.sunrise-sunset.org/json?lat=42.419331&lng=-71.119720&tzid=America/New_York")
+        .then (res => res.text())
+        .then (data => 
+        {
+            data = JSON.parse(data)
+            let sunrise = data.results.sunrise;
+            let sunset = data.results.sunset;
+            document.getElementById("sunrise").innerText = "Today's sunrise time at Tufts is " + sunrise;
+            document.getElementById("sunset").innerText = "Today's sunset time at Tufts is " + sunset;
+        })
+        .catch (error => console.log(error))
+    </script>
+    <ul>
+        <li>This API provides sunset and sunrise times for a given latitude and longitude. This API don't need an API key</li>
+        <li>I found this API at https://sunrise-sunset.org/</li>
+        <li>I need to provide langtitude and longitude of the location. The timezone(tzd) parameter is optional but I provided the America/New_York timezone to make the information relevant.</li>
+        <li>This API can be useful for someone who wants to take picture of sunrise or sunset and for someone who just really want to enjoy the beauty of sunset(me)</li>
+    </ul>
+</body>
+</html>
